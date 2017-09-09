@@ -1,0 +1,95 @@
+#parse("./inc/head.vm")
+      <div class="modal-content">
+         <div class="modal-body">
+           <form id="form" class="form-horizontal" >
+			<div class="form-group">
+                <span class="col-sm-3 control-label no-padding-right"><span class="red">*</span>所属平台：</span> 
+                <div class="col-sm-9">
+                    <select name="platId" class="col-xs-7">
+						#foreach($plat in $!{platList})
+							<option value="${plat.id}">$!{plat.name}</option>
+						#end
+					</select>
+                </div>
+            </div>
+			<div class="form-group">
+                <span class="col-sm-3 control-label no-padding-right"><span class="red">*</span>版本号：</span> 
+                <div class="col-sm-9">
+                    <input type="text"  name="version" desc="版本号" class="col-xs-7" />
+                </div>
+            </div>
+			
+			<div class="form-group">
+                <span class="col-sm-3 control-label no-padding-right"><span class="red">*</span>计划发布时间：</span> 
+                <div class="col-sm-9">
+                    <input class="date-picker col-xs-7" desc="计划发布时间" name="planReleaseTimeStr" type="text" data-date-format="yyyy-mm-dd" />
+					<span class="input-group-addon" style="padding:5px 5px;width:0px;">
+						<i class="icon-calendar bigger-110"></i>
+					</span>
+                </div>
+            </div>
+			<div class="form-group">
+                <span class="col-sm-3 control-label no-padding-right"><span class="red">*</span>计划上线时间：</span> 
+                <div class="col-sm-9">
+                    <input class="date-picker col-xs-7"  desc="计划上线时间" name="planProductionTimeStr" type="text" data-date-format="yyyy-mm-dd" />
+					<span class="input-group-addon" style="padding:5px 5px;width:0px;">
+						<i class="icon-calendar bigger-110"></i>
+					</span>
+                </div>
+            </div>
+			<div class="form-group">
+                <span class="col-sm-3 control-label no-padding-right">功能列表：</span> 
+                <div class="col-sm-9">
+					<textarea rows="3" cols="" name="functions"  class="col-xs-10" ></textarea>
+                </div>
+            </div>
+			<div class="form-group">
+                <span class="col-sm-3 control-label no-padding-right">遗留问题及处理意见：</span> 
+                <div class="col-sm-9">
+					<textarea rows="3" cols="" name="advices"  class="col-xs-10" ></textarea>
+                </div>
+            </div>
+			<div class="form-group">
+                <span class="col-sm-3 control-label no-padding-right">其他：</span> 
+                <div class="col-sm-9">
+					<textarea rows="3" cols="" name="remark"  class="col-xs-10" ></textarea>
+                </div>
+            </div>
+		   </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" id="item_submit" class="btn btn-primary">
+               	保存
+            </button>
+         </div>
+      </div>
+#parse("./inc/footer.vm")
+<script type="text/javascript">
+$(function(){
+	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});
+});
+//提交
+$("#item_submit").on("click", function (e) {
+    //check form data
+    var data = $('#form').serialize();
+    $.ajax({
+        type: "POST",
+        url: '${ServiceName}' + "/release/doAddRelease",
+        data: data,
+        dataType:'json'
+    }).done(function (data) {
+        if (data.code == -1) {
+            if(data.errorCode){
+				showErrorMsg(data.desc,data.errorCode);
+			}else{
+				layer.msg(data.desc);
+			}
+        } else {
+        	layer.msg('保存成功');
+        	closeWindowAndRefreshParent();
+        }
+    });
+});
+</script>

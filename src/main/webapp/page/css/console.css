@@ -1,0 +1,10 @@
+.title{width:220px;font-size: 10pt;}
+.item{width:220px;display:inline-block;padding:10px;}
+.result{padding-left: 5%;}
+.dealCount{    position: absolute;    right: 0px; top:6px;font-size: 11px;    color: gray;}
+.price{    color: coral;    font-size: 18pt;}
+.cate_item{height: 40px;    line-height: 40px;font-size:13px;}
+.cate_item .vals{width:100px;display:inline-block;text-decoration: blink;color:#545353;}
+.cate_item .attr{color:gray;width:100px;display:inline-block;padding-left: 20px;}
+a:HOVER {color:chocolate;}
+.red{color:red}

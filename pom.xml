@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.bc.npl</groupId>
+	<artifactId>Text-Learning</artifactId>
+	<packaging>war</packaging>
+	<version>1.0.0</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<downloadSources>true</downloadSources>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.jumore</groupId>
+			<artifactId>dove-boot</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.10.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>Text-Learning</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-war-plugin</artifactId>
+	            <version>3.0.0</version>
+	            <configuration>
+	                  <webResources>  
+	                     <resource>  
+	                         <directory>src/main/resources</directory>  
+	                         <filtering>true</filtering>  
+	                         <targetPath>WEB-INF/classes</targetPath>  
+	                     </resource>  
+	                 </webResources>   
+	             </configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>
